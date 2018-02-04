@@ -3,6 +3,10 @@ sudo: false
 services:
 - docker
 
+branches:
+  only:
+  - master
+
 language: generic
 
 before_install:
