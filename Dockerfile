@@ -4,6 +4,9 @@ LABEL maintainer="Erin Schnabel <schnabel@us.ibm.com> (@ebullientworks)"
 
 ENV ETCD_VERSION 2.2.2
 
+# Remove/avoid extraneous server.env files
+ENV WLP_SKIP_MAXPERMSIZE=true
+
 # Ensure up to date / patched OS
 RUN  apt-get -qq update \
   && apt-get -qq install -y curl \
