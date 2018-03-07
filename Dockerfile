@@ -9,10 +9,13 @@ ENV WLP_SKIP_MAXPERMSIZE=true
 
 # Ensure up to date / patched OS
 RUN  apt-get -qq update \
-  && apt-get -qq install -y curl \
   && DEBIAN_FRONTEND=noninteractive apt-get -qq upgrade -y \
+  && apt-get -qq install -y busybox curl \
   && apt-get -qq clean \
-  && rm -rf /tmp/* /var/lib/apt/lists/*
+  && rm -rf /tmp/* /var/lib/apt/lists/* \
+  && ln -s /bin/busybox /bin/netstat \
+  && ln -s /bin/busybox /bin/ping \
+  && ln -s /bin/busybox /bin/vi
 
 # setup etcd
 RUN wget https://github.com/coreos/etcd/releases/download/v${ETCD_VERSION}/etcd-v${ETCD_VERSION}-linux-amd64.tar.gz -q \
